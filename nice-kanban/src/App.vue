@@ -21,15 +21,17 @@ export default {
 
 <style>
 
-@import '../node_modules/lato-font/css/lato-font.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap');
 
 html {
   background-color: #000000;
 }
 #app {
-  font-family: "Lato", "Open Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Lato", "Noto Sans SC", "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
   color: #ffffff;
   background-color: #000000;
 }
