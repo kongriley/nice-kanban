@@ -1,29 +1,23 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <MainPage class="m-0 p-0"/>
+    <Navbar/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
+import Navbar from './components/Navbar.vue'
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    MainPage
+    Navbar
   }
 }
 </script>
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap');
-
 html {
   background-color: #000000;
 }
@@ -35,26 +29,21 @@ html {
   color: #ffffff;
   background-color: #000000;
 }
-
 ::-webkit-scrollbar {
   background-color: rgba(0,0,0,0);
   -webkit-border-radius: 100px;
 	border-radius: 100px;
 }
-
 ::-webkit-scrollbar:vertical {
   width: 5px;
 }
-
 ::-webkit-scrollbar:horizontal {
   height: 5px;
 }
-
 ::-webkit-scrollbar:hover {
   background-color: rgba(255,255,255, 0.05);
   transition: background-color 0.5 ease;
 }
-
 ::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.3);
   -webkit-border-radius: 100px;
