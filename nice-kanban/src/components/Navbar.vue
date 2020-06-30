@@ -16,7 +16,6 @@ export default {
 
 <style scoped>
 #Navbar {
-  /* text-align: center; */
   padding: 1.5rem;
   padding-bottom: 2rem;
   display: flex;
@@ -33,8 +32,7 @@ a {
   margin-right: 5rem;
 }
 .side-container {
-  font-size: 1.75em !important;
+  font-size: 1.5em !important;
   font-weight: 300 !important;
-  /* padding-left: 3rem; */
 }
 </style>

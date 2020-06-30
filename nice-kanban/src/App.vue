@@ -29,6 +29,27 @@ html {
   color: #ffffff;
   background-color: #000000;
 }
+
+button {
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+
+  border-radius: 0.5rem;
+  padding: 0.75em 1em;
+
+  font-family: "Lato", "Noto Sans SC", "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 300;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   background-color: rgba(0,0,0,0);
   -webkit-border-radius: 100px;
@@ -54,4 +75,8 @@ html {
   -webkit-border-radius: 100px;
 	border-radius: 100px;
 } 
+/* Allows for placeholders with empty divs using the data-text field. */
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
 </style>

@@ -14,11 +14,17 @@ Vue.use(VueRouter)
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
-  }, {
+  }, 
+  {
+    path: '/board/:boardId',
+    name: 'Board',
+    component: () => import('../views/BoardPage.vue') // Change to edit board view
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/ErrorPage.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({
