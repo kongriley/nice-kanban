@@ -16,6 +16,10 @@ Vue.use(VueRouter)
     component: () => import('../views/About.vue')
   }, 
   {
+    path: '/board',
+    redirect: '/'
+  },
+  {
     path: '/board/:boardId',
     name: 'Board',
     component: () => import('../views/BoardPage.vue') // Change to edit board view

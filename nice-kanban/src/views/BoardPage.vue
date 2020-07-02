@@ -24,18 +24,28 @@ export default {
 
   methods: {
     changeTitle: function() {
-      this.$store.commit('mutateBoardTitle', {
-        id: this.boardId,
-        title: this.$refs.titleRef.innerText
-      })
-      this.$store.dispatch('writeBoards')
+      let textToChange = this.$refs.titleRef.innerText
+
+      if (textToChange) {
+        this.$store.commit('mutateBoardTitle', {
+          id: this.boardId,
+          title: textToChange
+        })
+        this.$store.dispatch('writeBoards')
+      } else {
+        this.$refs.titleRef.innerText = this.$store.state.boards[this.boardId].title
+      }
     },
     deleteBoard: function() {
       this.$store.commit('deleteBoard', {
         id: this.boardId
       })
       this.$store.dispatch('writeBoards')
-      .then(this.redirectToMainPage())
+      .then(() => {
+        setTimeout(() => {
+        this.redirectToMainPage()
+        }, 100)
+      })
     },
     redirectToMainPage: function() {
       this.$router.push('/')

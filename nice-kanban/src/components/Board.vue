@@ -31,6 +31,10 @@ export default {
   methods: {
     redirectToBoardPage: function() {
       this.$router.push('/board/'+this.id)
+    },
+    addCard: function() {
+      this.$store.commit('addCard', this.id)
+      this.$store.dispatch('writeBoards')
     }
   },
 }
@@ -87,7 +91,7 @@ export default {
   }
   .scroll-board {
     overflow-y: scroll;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
   .kanban-card {
     background-color: rgba(255,255,255,0.1);

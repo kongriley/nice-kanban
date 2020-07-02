@@ -21,6 +21,7 @@ export default new Vuex.Store({
   state: {
     loading: true,
     errorMessage: '',
+    redirectWhenAdd: true,
     boards: [
       {
         title: 'testing',
@@ -76,6 +77,13 @@ export default new Vuex.Store({
     mutateBoardTitle(state, payload) {
       state.boards[payload.id].title = payload.title
     },
+    addCard(state, payload) {
+      state.boards[payload].cards.push({
+          text: 'New Card',
+          dueDate: '1/1/1970', // Change to today
+          tags: ['lvl1']
+      })
+    },
     setNoInternetErrorMessage(state) {
       state.errorMessage = 'Couldn\'t load database! Check internet connection.'
       state.loading = false
@@ -98,11 +106,17 @@ export default new Vuex.Store({
       })
     },
     writeBoards({ state, commit }) {
-      userCollection.doc('test').set({
-        boards: state.boards
-      })
-      .catch(() => {
-        commit('setWriteErrorMessage')
+      return new Promise((resolve, reject) => {
+        userCollection.doc('test').set({
+          boards: state.boards
+        })
+        .then(() => {
+          resolve()
+        })
+        .catch(() => {
+          commit('setWriteErrorMessage')
+          reject()
+        })
       })
     }
   },
