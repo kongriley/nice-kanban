@@ -36,6 +36,14 @@ export default {
     addBoard() {
       this.$store.commit('addBoard')
       this.$store.dispatch('writeBoards')
+      .then(() => {
+        if (this.$store.state.redirectWhenAdd) {
+          this.redirectToBoardPage()
+        }
+      })
+    },
+    redirectToBoardPage() {
+      this.$router.push('/board/'+(this.$store.state.boards.length-1))
     }
   },
 
@@ -60,9 +68,7 @@ export default {
     text-align: center;
     margin-top: 1em;
   }
-  .error {
-    color: #FF0000;
-  }
+  
   .loading {
     font-weight: 300 !important;
   }

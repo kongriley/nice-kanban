@@ -3,11 +3,18 @@
 
     <h1 class="desc"> Board </h1>
 
-    <div class="field" @keydown.enter="$refs.titleRef.blur()" @blur="changeTitle()" ref="titleRef" contenteditable="true" spellcheck="false"> 
+    <div class="field title-field" @keydown.enter="$refs.titleRef.blur()" @blur="changeTitle()" ref="titleRef" contenteditable="true" spellcheck="false"> 
       {{ board.title }} 
     </div>
 
-    <button class="delete-button" @click="deleteBoard()"> Delete Board </button>
+    <button class="save-button primary-button" @click="redirectToMainPage()"> Save Board </button>
+    <button class="delete-button error-button" @click="toggleDeleteMessage()"> Delete Board </button>
+
+    <div class="delete-message-box" v-if="deleteMessage">
+      <div class="error delete-display"> Warning! Deleting a board will delete all of its cards. </div>
+      <button class="cancel-button primary-button" @click="toggleDeleteMessage()"> Cancel </button>
+      <button class="error-button" @click="deleteBoard()"> Really Delete </button>
+    </div>
   </div>
 </template>
 
@@ -19,6 +26,7 @@ export default {
     return {
       boardId: 0,
       board: {},
+      deleteMessage: false,
     }
   },
 
@@ -35,6 +43,9 @@ export default {
       } else {
         this.$refs.titleRef.innerText = this.$store.state.boards[this.boardId].title
       }
+    },
+    toggleDeleteMessage: function() {
+      this.deleteMessage = !this.deleteMessage;
     },
     deleteBoard: function() {
       this.$store.commit('deleteBoard', {
@@ -69,10 +80,7 @@ export default {
   }
   .field {
     display: table;
-    min-width: 17.5rem;
     width: auto;
-
-    font-size: 1.5em !important;
 
     padding: 0.25em;
     border-bottom: 2px solid rgba(255,255,255,0.3);
@@ -83,11 +91,31 @@ export default {
     border-bottom: 2px solid rgba(255,255,255,0.5);
   }
 
+  .title-field {
+    min-width: 17.5rem;
+    font-size: 1.5em !important;
+  }
+
+  .save-button {
+    margin-right: 2rem;
+  }
+
   .delete-button {
     margin-top: 3rem;
-    background-color: #b71c1c;
+    margin-bottom: 1.5rem;
   }
-  .delete-button:hover {
-    background-color: #b70909;
+
+  .delete-display {
+    font-size: 1.25em !important;
+  }
+  .cancel-button {
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+  .delete-message-box {
+    display: table;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255,0,0,0.1);
   }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div id="Board">
-    <div class="title" @click="redirectToBoardPage()" ref="titleRef"> 
+    <router-link class="title" :to="`/board/${id}`" ref="titleRef"> 
       {{ board.title }} 
-    </div>
+    </router-link>
     <div class="title-length" v-if="board.cards.length == 1"> 1 card</div>
     <div class="title-length" v-else> {{ board.cards.length }} cards</div>
 
@@ -12,16 +12,26 @@
     </svg>
 
     <div class="scroll-board">
-      <div class="kanban-card my-4 p-2 rounded-lg" v-for="card in board.cards" :key="card.text"> {{ card.text }} </div>
+      <draggable :list="board.cards">
+        <Card class="kanban-card" v-for="(n, i) in board.cards" :key="i" :card="board.cards[i]" :id="i"> </Card>
+      </draggable>
     </div>
 
   </div>
 </template>
 
 <script>
+import Card from './Card.vue'
+import draggable from 'vuedraggable'
+
 export default {
 
   name: "Board",
+
+  components: {
+    Card,
+    draggable,
+  },
 
   props: {
     board: Object,
@@ -41,16 +51,20 @@ export default {
 </script>
 
 <style scoped>
+  
   #Board {
     position: relative;
-    height: calc(100vh - 11em);
-    flex: 0 0 calc( (100vw - 16.5em) / 4);
+    height: calc(100vh - 10em);
+    flex: 0 0 calc(100vw / 4 - 1.5em);
     background-color: rgba(30, 136, 229, 0.10);
     margin-right: 1.5em;
     margin-bottom: 0.5em;
-    padding: 1.25em;
+    padding-top: 1.25em;
     border-radius: 0.5em;
     min-width: 0;
+  }
+  #Board:hover {
+    background-color: rgba(30, 136, 229, 0.12);
   }
   .add-card-icon {
     position: absolute;
@@ -71,12 +85,16 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
 
+    color: #FFFFFF !important;
+    text-decoration: none;
+
     font-size: 1.5rem !important;
 
     min-width: 0;
     max-width: calc(100% - 3rem);
     
     padding: 0.25em;
+    padding-left: 1.25em;
     margin-left: -0.25em;
 
     border-radius: 0.5rem;
@@ -87,19 +105,31 @@ export default {
   }
   .title-length {
     font-size: 1.125em !important;
+    padding-left: 1.25em;
     color: rgba(255,255,255,0.75);
   }
   .scroll-board {
     overflow-y: scroll;
-    margin-top: 0.75rem;
+    height: calc(100vh - 17.5em);
+    margin: 1.5rem 0;
+    padding: 0 1.25em;
+    display: flex;
+    flex-direction: column;
   }
-  .kanban-card {
-    background-color: rgba(255,255,255,0.1);
-    margin: 1.5rem 0rem;
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
+  
+  @media (max-width: 768px) { /* Small displays */
+    #Board {
+      flex: 0 0 calc(100vw / 2 - 1.75em);
+    }
   }
-  .kanban-card:hover {
-    background-color: rgba(255,255,255,0.2);
+
+  @media (max-width: 576px) {
+    #Board {
+      height: calc(100vh - 12.25em);
+      flex: 0 0 calc(100vw - 2.25em);
+    }
+    .scroll-board {
+      height: calc(100vh - 20em);
+    }
   }
 </style>

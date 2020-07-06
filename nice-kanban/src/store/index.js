@@ -59,6 +59,7 @@ export default new Vuex.Store({
   mutations: {
     setBoards(state, payload) {
       state.boards = payload.boards
+      this.commit('clearErrorMessage')
       state.loading = false
     },
     addBoard(state) {
@@ -90,6 +91,9 @@ export default new Vuex.Store({
     },
     setWriteErrorMessage(state) {
       state.errorMessage = 'Couldn\'t write to database! Check internet connection.'
+    },
+    clearErrorMessage(state) {
+      state.errorMessage = ''
     }
   },
 
@@ -111,6 +115,7 @@ export default new Vuex.Store({
           boards: state.boards
         })
         .then(() => {
+          commit('clearErrorMessage')
           resolve()
         })
         .catch(() => {
