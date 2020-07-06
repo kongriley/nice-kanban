@@ -70,29 +70,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #BoardPage {
     padding: 0 3rem;
-  }
-  .desc {
-    font-size: 2.5em !important;
-    padding-bottom: 0.25em;
-  }
-  .field {
-    display: table;
-    width: auto;
-
-    padding: 0.25em;
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-    transition: border-bottom 0.15s ease-out;
-  }
-  .field:focus {
-    outline: 0px solid transparent;
-    border-bottom: 2px solid rgba(255,255,255,0.5);
   }
 
   .title-field {
     min-width: 17.5rem;
+    min-height: 1.5em;
     font-size: 1.5em !important;
   }
 

@@ -85,6 +85,12 @@ export default new Vuex.Store({
           tags: ['lvl1']
       })
     },
+    deleteCard(state, payload) {
+      state.boards[payload.boardId].cards.splice(payload.cardId, 1)
+    },
+    mutateCardText(state, payload) {
+      state.boards[payload.boardId].cards[payload.cardId].text = payload.text
+    },
     setNoInternetErrorMessage(state) {
       state.errorMessage = 'Couldn\'t load database! Check internet connection.'
       state.loading = false

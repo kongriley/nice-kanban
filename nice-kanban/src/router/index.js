@@ -30,6 +30,11 @@ Vue.use(VueRouter)
     component: () => import('../views/BoardPage.vue')
   },
   {
+    path: '/board/:boardId/card/:cardId',
+    name: 'Card',
+    component: () => import('../views/CardPage.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/ErrorPage.vue')

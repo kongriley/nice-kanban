@@ -1,6 +1,6 @@
 <template>
   <div id="Board">
-    <router-link class="title" :to="`/board/${id}`" ref="titleRef"> 
+    <router-link class="title" :to="`/board/${id}`"> 
       {{ board.title }} 
     </router-link>
     <div class="title-length" v-if="board.cards.length == 1"> 1 card</div>
@@ -12,8 +12,8 @@
     </svg>
 
     <div class="scroll-board">
-      <draggable :list="board.cards">
-        <Card class="kanban-card" v-for="(n, i) in board.cards" :key="i" :card="board.cards[i]" :id="i"> </Card>
+      <draggable :list="board.cards" chosenClass="chosen" group="board" @update="onBoardChange">
+        <Card class="kanban-card" v-for="(n, i) in board.cards" :key="i" :card="board.cards[i]" :boardId="id" :id="i"> </Card>
       </draggable>
     </div>
 
@@ -45,6 +45,9 @@ export default {
     addCard: function() {
       this.$store.commit('addCard', this.id)
       this.$store.dispatch('writeBoards')
+    },
+    onBoardChange: function() {
+      this.$store.dispatch('writeBoards')
     }
   },
 }
@@ -55,7 +58,7 @@ export default {
   #Board {
     position: relative;
     height: calc(100vh - 10em);
-    flex: 0 0 calc(100vw / 4 - 1.5em);
+    flex: 0 0 calc(100vw / 4 - 1.75em);
     background-color: rgba(30, 136, 229, 0.10);
     margin-right: 1.5em;
     margin-bottom: 0.5em;
@@ -63,9 +66,9 @@ export default {
     border-radius: 0.5em;
     min-width: 0;
   }
-  #Board:hover {
+  /* #Board:hover {
     background-color: rgba(30, 136, 229, 0.12);
-  }
+  } */
   .add-card-icon {
     position: absolute;
     top: 1.5rem;
